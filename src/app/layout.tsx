@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { isTokenExpired } from "./utils/token";
 import { useRouter } from "next/navigation";
 import StoreProvider from "@/store/Provider";
-import { jwtDecode } from "jwt-decode";
+
 // Create a new QueryClient instance
 const queryClient = new QueryClient();
 

@@ -18,12 +18,14 @@ const Login = () => {
 
   // Redirect to invoices page if token exists
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const TokenExpired = isTokenExpired(token);
-    if (token || !TokenExpired) {
-      router.push("/invoices"); // Using Next.js's useRouter for navigation
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("token");
+      const TokenExpired = isTokenExpired(token);
+      if (token && !TokenExpired) {
+        router.push("/invoices");
+      }
+      setLoading(false);
     }
-    setLoading(false); // Set loading to false after checking the token
   }, [router]);
 
   const { mutate, isPending, error } = useMutation({

@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useFormik } from "formik";
 import { invoiceSchema } from "../../schema/index";
 import { useState, useRef, useEffect } from "react";
@@ -23,10 +23,9 @@ import { useGetUserById } from "@/hooks/user";
 const CreateInvoice = () => {
   const { iscreatingInvoice, creatingInvoiceStatus, creatingInvoiceError } =
     useCreateNewInvoice();
-  const token = localStorage.getItem("token");
-  if (token === null) {
-    throw new Error("Token is null");
-  }
+  const token = localStorage.getItem("token") as string;
+  console.log(token);
+
   const decodedToken = jwtDecode<{ id: string }>(token);
   const { user, isLoadingUserById } = useGetUserById(decodedToken.id);
   const [intialVal, setIntialVal] = useState<any | null>(null);
@@ -81,7 +80,7 @@ const CreateInvoice = () => {
 
       try {
         const response = await axios.post(
-          "http://localhost:3001/invoices",
+          `${process.env.NEXT_PUBLIC_API_URL}/invoices`,
           values,
           {
             headers: {

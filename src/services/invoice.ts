@@ -8,7 +8,7 @@ export const getInvoiceById: (
 ) => Promise<InvoiceRecord> = async (invoiceSlug) => {
   const token = localStorage.getItem("token"); // Retrieve token from localStorage
   const { data } = await axios.get(
-    `http://localhost:3001/invoices/?slug=${invoiceSlug}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/invoices/?slug=${invoiceSlug}`,
     {
       headers: {
         Authorization: `Bearer ${token}`, // Include token in Authorization header
@@ -31,7 +31,7 @@ export const updateInvoiceById: ({
   try {
     const token = localStorage.getItem("token"); // Retrieve token from localStorage
     const response = await axios.put(
-      `http://localhost:3001/invoices?slug=${id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/invoices?slug=${id}`,
       updatedInvoice,
       {
         headers: {
@@ -50,7 +50,7 @@ export const updateInvoiceById: ({
 export const createNewInvoice = async (invoiceData: IInvoiceCreate) => {
   const token = localStorage.getItem("token");
   const response = await axios.post(
-    `http://localhost:3001/invoices`,
+    `${process.env.NEXT_PUBLIC_API_URL}/invoices`,
     invoiceData,
     {
       headers: {
@@ -74,7 +74,7 @@ export const fetchSalaries = async (page: number) => {
   console.log(username);
 
   const { data } = await axios.get(
-    `http://localhost:3001/invoices/?page=${page}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/invoices/?page=${page}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -93,7 +93,7 @@ export const deleteInvoiceById: (
     return;
   }
   const response = await axios.delete(
-    `http://localhost:3001/invoices/?slug=${invoiceSlug}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/invoices/?slug=${invoiceSlug}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
