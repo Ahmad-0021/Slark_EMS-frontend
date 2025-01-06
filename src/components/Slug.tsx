@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import { invoiceSchema } from "@/app/schema/index";
 import { useGetUserById } from "@/hooks/user";
-import { jwtDecode } from "jwt-decode";
+// import { jwtDecode } from "jwt-decode";
 import { useRouter } from "next/navigation";
 // import { IGetUserResponse } from "@/interfaces/user";
 
@@ -18,8 +18,7 @@ const UpdateInvoice = ({ slug }: { slug: string }) => {
   if (token === null) {
     throw new Error("Token is null");
   }
-  const decodedToken = jwtDecode<{ id: string }>(token);
-  const { user, isLoadingUserById } = useGetUserById(decodedToken.id);
+  const { user, isLoadingUserById } = useGetUserById();
   console.log(user, 1);
   const {
     updateInvoiceById,

@@ -17,20 +17,23 @@ import {
 import { getPreviousMonth } from "../../utils/Month";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { jwtDecode } from "jwt-decode";
 import { useGetUserById } from "@/hooks/user";
 
 const CreateInvoice = () => {
   const { iscreatingInvoice, creatingInvoiceStatus, creatingInvoiceError } =
     useCreateNewInvoice();
-  const token = localStorage.getItem("token") as string;
-  console.log(token);
-
-  const decodedToken = jwtDecode<{ id: string }>(token);
-  const { user, isLoadingUserById } = useGetUserById(decodedToken.id);
+  const [token, setTokenState] = useState<string | null>(null);
+  const { user, isLoadingUserById } = useGetUserById();
   const [intialVal, setIntialVal] = useState<any | null>(null);
+
   useEffect(() => {
-    console.log(user?.data.user);
+    const storedToken = localStorage.getItem("token");
+    if (storedToken) {
+      setTokenState(storedToken);
+    } else {
+      setTokenState(null);
+    }
+
     if (user) {
       setIntialVal(user); // Update state
     }
@@ -61,9 +64,6 @@ const CreateInvoice = () => {
     },
     validationSchema: invoiceSchema,
     onSubmit: async (values) => {
-      const token = localStorage.getItem("token");
-      console.log(values);
-
       if (!token) {
         toast.error("Please login first to submit record", {
           position: "top-right",

@@ -12,17 +12,21 @@ import { isTokenExpired } from "../utils/token";
 const Login = () => {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(true); // State to track loading state
+  const [loading, setLoading] = useState(true);
+  const [token, setTokenState] = useState<string | null>(null); // Client-side token state
 
   const dispatch = useDispatch();
 
   // Redirect to invoices page if token exists
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const token = localStorage.getItem("token");
-      const TokenExpired = isTokenExpired(token);
-      if (token && !TokenExpired) {
+      const storedToken = localStorage.getItem("token");
+      const TokenExpired = isTokenExpired(storedToken);
+      if (storedToken && !TokenExpired) {
+        setTokenState(storedToken);
         router.push("/invoices");
+      } else {
+        setTokenState(null);
       }
       setLoading(false);
     }
@@ -32,7 +36,6 @@ const Login = () => {
     mutationFn: login,
     onSuccess: (data) => {
       localStorage.setItem("token", data.token);
-
       dispatch(setToken(data.token));
       router.push("/invoices"); // Redirect on success
     },
@@ -52,14 +55,12 @@ const Login = () => {
     },
   });
 
-  const token = localStorage.getItem("token");
-
   if (loading) {
-    return <div>Loading...</div>; // You can replace this with a spinner or skeleton loader
+    return <div>Loading...</div>; // Render loading spinner
   }
 
   if (token) {
-    return null; // If token exists, render nothing
+    return null; // Prevent rendering if token exists
   }
 
   return (
