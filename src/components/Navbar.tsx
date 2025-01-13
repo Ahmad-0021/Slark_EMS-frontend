@@ -29,21 +29,12 @@ const Navbar = () => {
           Slark
         </Link>
         <div className="space-x-4">
-          {token && !expiredToken ? (
-            <Link
-              href="/invoices/create"
-              className="text-white text-bold text-base m-5 hover:text-purple-200 transition duration-300"
-            >
-              Create New Invoice
-            </Link>
-          ) : (
-            <Link
-              href="/calculate"
-              className="text-white text-bold text-base m-5 hover:text-purple-200 transition duration-300"
-            >
-              Calculate Invoice
-            </Link>
-          )}
+          <Link
+            href="/calculate"
+            className="text-white text-bold text-base m-5 hover:text-purple-200 transition duration-300"
+          >
+            Calculate Invoice
+          </Link>
 
           {token && !expiredToken ? (
             <button

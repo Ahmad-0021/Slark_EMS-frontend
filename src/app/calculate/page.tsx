@@ -56,7 +56,7 @@ const CalculateInvoice = () => {
       }
       const salaryDetails = calculateInvoice(values);
       setTotalSalaryDetails(salaryDetails);
-      console.log("Total Salary Details:", salaryDetails);
+     
 
       createNewInvoice({
         basicPayForThisMonth: values.basicPayForThisMonth,
@@ -68,7 +68,7 @@ const CalculateInvoice = () => {
         paidLeavesForThisMonth: values.paidLeavesForThisMonth,
       });
 
-      console.log("Form Values:", values);
+   
       // window.location.href = "/invoices";
     },
   });

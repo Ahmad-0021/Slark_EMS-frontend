@@ -9,6 +9,7 @@ export interface IGetUserResponse {
     user: {
       basicPayForThisMonth: number;
       committedHoursForThisMonth: number;
+      type: string;
     };
   };
 }

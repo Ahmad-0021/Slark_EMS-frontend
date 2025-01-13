@@ -32,14 +32,15 @@ const Login = () => {
     }
   }, [router]);
 
-  const { mutate, isPending, error } = useMutation({
+  const { mutate, isPending, error, isError } = useMutation({
     mutationFn: login,
     onSuccess: (data) => {
       localStorage.setItem("token", data.token);
       dispatch(setToken(data.token));
-      router.push("/invoices"); // Redirect on success
+      router.push("/invoices");
     },
   });
+  console.log(error?.message);
 
   const formik = useFormik({
     initialValues: {
@@ -165,9 +166,9 @@ const Login = () => {
             {isPending ? "Logging in..." : "Login"}
           </button>
         </form>
-        {error && (
+        {isError && (
           <p className="mt-4 text-center text-sm text-red-600">
-            {error instanceof Error ? error.message : "An error occurred"}
+            {error?.message || "something went wrong"}
           </p>
         )}
       </div>

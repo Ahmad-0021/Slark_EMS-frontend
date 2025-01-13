@@ -19,7 +19,7 @@ const UpdateInvoice = ({ slug }: { slug: string }) => {
     throw new Error("Token is null");
   }
   const { user, isLoadingUserById } = useGetUserById();
-  console.log(user, 1);
+
   const {
     updateInvoiceById,
     isupdatingInvoiceById,
@@ -30,13 +30,10 @@ const UpdateInvoice = ({ slug }: { slug: string }) => {
   const [initialValue, setInitialValue] = useState<any | null>(null);
 
   useEffect(() => {
-    console.log(user);
     if (user) {
       setInitialValue(user); // Update state
     }
   }, [user]);
-
-  console.log(initialValue, "init");
 
   const onSubmit = (values: IInvoiceCreate) => {
     const token = localStorage.getItem("token");
@@ -89,11 +86,13 @@ const UpdateInvoice = ({ slug }: { slug: string }) => {
       name: "basicPayForThisMonth",
       label: "Basic Pay",
       title: "Enter your Base Salary decided with your company",
+      isDisabled: true,
     },
     {
       name: "committedHoursForThisMonth",
       label: "Committed Hours",
       title: "Enter your Working hours decided with your company for the month",
+      isDisabled: true,
     },
     {
       name: "workingHoursForThisMonth",
@@ -123,8 +122,6 @@ const UpdateInvoice = ({ slug }: { slug: string }) => {
   }
 
   // Check if initialValues are correctly set after fetching invoice data
-  // console.log("Initial Values:", initialValues);
-  console.log(formik.values.basicPayForThisMonth);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-50 flex justify-center items-center p-4">
@@ -149,6 +146,7 @@ const UpdateInvoice = ({ slug }: { slug: string }) => {
                 </label>
                 <input
                   type="number"
+                  disabled={field.isDisabled}
                   id={field.name}
                   name={field.name}
                   value={formik.values[field.name as keyof IInvoiceCreate]}

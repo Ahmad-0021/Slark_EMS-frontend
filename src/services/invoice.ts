@@ -63,15 +63,15 @@ export const createNewInvoice = async (invoiceData: IInvoiceCreate) => {
 
 export const fetchSalaries = async (page: number) => {
   const token = localStorage.getItem("token");
-  console.log(token);
+ 
   if (!token) {
     window.location.href = "/";
     return;
   }
   const decodedToken = jwtDecode<{ username: string }>(token);
-  console.log(decodedToken);
+ 
   const username = decodedToken.username;
-  console.log(username);
+
 
   const { data } = await axios.get(
     `${process.env.NEXT_PUBLIC_API_URL}/invoices/?page=${page}`,

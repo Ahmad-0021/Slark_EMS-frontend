@@ -99,7 +99,7 @@ const CreateInvoice = () => {
           draggable: true,
           progress: undefined,
         });
-        console.log("API Response:", response.data);
+      
         router.push("/invoices");
       } catch (error: any) {
         toast.error(

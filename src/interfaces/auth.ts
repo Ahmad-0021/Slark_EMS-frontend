@@ -4,5 +4,6 @@ export interface Ilogin {
 }
 
 export interface IloginResponse {
+  role: { name: string };
   token: string;
 }

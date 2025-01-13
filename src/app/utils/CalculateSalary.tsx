@@ -42,7 +42,7 @@ export function calculateInvoice(values: IInvoiceCreate) {
   //     ? basicPayPerHourForThisMonth * requiredTotalHoursForThisMonth
   //     : basicPayForThisMonth;
 
-  console.log(basicPayForThisMonth);
+
   const overTimePayForThisMonth =
     overTimePayPerHourForThisMonth * overTimeHoursForThisMonth;
 
