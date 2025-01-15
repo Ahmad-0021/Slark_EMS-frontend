@@ -10,6 +10,7 @@ export interface IGetUserResponse {
       basicPayForThisMonth: number;
       committedHoursForThisMonth: number;
       type: string;
+      joiningDate: string;
     };
   };
 }

@@ -1,20 +1,20 @@
 "use client";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useFormik } from "formik";
-import { invoiceSchema } from "../../schema/index";
+import { invoiceSchema } from "@/app/schema/index";
 import { useState, useRef, useEffect } from "react";
-import { formatIndianNumber } from "../../utils/IndianNumber";
-import { copyTextToClipboard } from "../../utils/CopyToClipboard";
+import { formatIndianNumber } from "../../../utils/IndianNumber";
+import { copyTextToClipboard } from "../../../utils/CopyToClipboard";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useCreateNewInvoice } from "../../../hooks/invoice";
-import { calculateInvoice } from "../../utils/CalculateSalary";
+import { useCreateNewInvoice } from "../../../../hooks/invoice";
+import { calculateInvoice } from "../../../utils/CalculateSalary";
 
 import {
   IInvoiceCreate,
   ItotalInvoiceDetail,
-} from "../../../interfaces/invoice";
-import { getPreviousMonth } from "../../utils/Month";
+} from "../../../../interfaces/invoice";
+import { getPreviousMonth } from "../../../utils/Month";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useGetUserById } from "@/hooks/user";
@@ -99,8 +99,8 @@ const CreateInvoice = () => {
           draggable: true,
           progress: undefined,
         });
-      
-        router.push("/invoices");
+
+        router.push("/dashboard/invoices");
       } catch (error: any) {
         toast.error(
           error.response?.data?.message ||
@@ -223,7 +223,7 @@ const CreateInvoice = () => {
           {creatingInvoiceStatus === "success" && (
             <p className="mt-4 text-green-500 font-bold">
               Salary data submitted successfully!
-              {(window.location.href = "/invoices")}
+              {(window.location.href = "/dashboard/invoices")}
             </p>
           )}
         </div>

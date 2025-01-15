@@ -7,7 +7,7 @@ const App = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      router.push("/invoices");
+      router.push("/dashboard");
     }
   }, [router]);
   return <></>;

@@ -16,6 +16,7 @@ const Dashboard = () => {
         value: user?.data.user.committedHoursForThisMonth,
       },
       { label: "Job Type", value: user?.data.user.type },
+      { label: "Joining Date", value: user?.data.user.joiningDate },
     ];
   }, [user]);
 

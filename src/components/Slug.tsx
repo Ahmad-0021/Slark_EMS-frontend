@@ -63,7 +63,7 @@ const UpdateInvoice = ({ slug }: { slug: string }) => {
       id: slug,
       updatedInvoice,
     });
-    router.push("/invoices");
+    router.push("/dashboard/invoices");
   };
 
   const formik = useFormik<IInvoiceCreate>({

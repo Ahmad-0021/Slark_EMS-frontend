@@ -23,7 +23,7 @@ export default function AppProvider({
       localStorage.removeItem("token");
       router.push("/auth");
     } else {
-      router.push("/invoices");
+      router.push("/dashboard");
     }
   }, [router]);
 

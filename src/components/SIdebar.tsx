@@ -5,8 +5,8 @@ import Link from "next/link";
 const Sidebar = () => {
   const pathName = usePathname();
   const menuItems = [
-    { label: "Dashboard", link: "/invoices/dashboard" },
-    { label: "Invoices", link: "/invoices" },
+    { label: "Dashboard", link: "/dashboard" },
+    { label: "Invoices", link: "/dashboard/invoices" },
     // Add more menu items as needed
   ];
 

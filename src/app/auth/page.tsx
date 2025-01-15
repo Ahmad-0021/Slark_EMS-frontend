@@ -24,7 +24,7 @@ const Login = () => {
       const TokenExpired = isTokenExpired(storedToken);
       if (storedToken && !TokenExpired) {
         setTokenState(storedToken);
-        router.push("/invoices");
+        router.push("/dashboard");
       } else {
         setTokenState(null);
       }
@@ -37,7 +37,7 @@ const Login = () => {
     onSuccess: (data) => {
       localStorage.setItem("token", data.token);
       dispatch(setToken(data.token));
-      router.push("/invoices");
+      router.push("/dashboard");
     },
   });
   console.log(error?.message);
